@@ -1,0 +1,59 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "http://bicgraphic.com/SalesRep.schema.json",
+	"type": "object",
+	"title": "SalesRep ODS Data Model Schema",
+	"description": "This Schema defines the SalesRep data in ODS",
+
+	"required": [
+		"SalesRep"
+	],
+	"properties": {
+		"SalesRep": {
+			"type": "object",
+			"properties": {
+				"CustomerAccountNumber": {
+					"type": "string",
+					"description": "The CustomerAccountNumber within the source system"
+				},
+				"CustomerAccountName": {
+					"type": "string",
+					"description": "The CustomerAccountName within the source system"
+				},
+				"CategoryType": {
+					"type": "string",
+					"description": " Category Type for an Account. Example : Hardgoods "
+				},
+				"CategoryID": {
+					"type": "number",
+					"description": " The unique ID of the category type for an Account "
+				},
+				"ResourceType": {
+					"type": "string",
+					"description": " The resource type of the sales rep. Example: FIELD_SALES "
+				},
+				"ResourceTypeID": {
+					"type": "number",
+					"description": "The unique ID for the  resource type of the sales rep "
+				},
+				"ResourceName": {
+					"type": "string",
+					"description": "The customer sales rep Name associated to the customer for each category "
+				},
+				"ResourceID": {
+					"type": "number",
+					"description": "The unique ID usually EBS USER ID of the customer sales rep Name associated to the customer for each category"
+				},
+				"isPrimary": {
+					"type": "boolean",
+					"description": "Denotes if the sales rep for the customer is primary "
+				},
+				"CurrencyCode": {
+					"type": "string",
+					"description": "The currency code associated to the customer "
+
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {    
+	"Invoice": {
+      "type": "object",
+      "description": "This object identifies the fields required to describe invoice object in ODS",
+      "required": ["invoiceNumber","soNumber"],
+      "properties": {
+        "invoiceNumber": {
+          "type": "string",
+          "description": "The Invoice Number associated to the Order for a customer"
+        },
+        "invoiceType": {
+          "type": "string",
+          "description": "The type of invoice being generated for the order"
+        },
+        "invoiceDate": {
+          "type": "string",
+          "description": "The date the order was invoiced"
+        },
+        "dueDate": {
+          "type": "string",
+          "description": "The customer customer's due date to fulfill the invoice"
+        },
+        "invoiceAmount": {
+          "type": "number",
+          "description": "The total invoice amount for the Order. This value can be a partial amount of an order"
+        },
+        "poNumber": {
+          "type": "string",
+          "description": "The customer purchase order number within the source system"
+        },
+        "soNumber": {
+          "type": "string",
+          "description": "The customer sales order number within the source system"
+        },
+        "CurrencyCode": {
+          "type": "string",
+          "description": "The currency code that the invoice was generated against"
+        },
+        "invoiceStatus": {
+          "type": "string",
+          "description": "The status of the invoice."
+        },
+        "amountDue": {
+          "type": "number",
+          "description": "The amount due from the customer to fulfill the invoice"
+        },
+        "customerNumber": {
+          "type": "string",
+          "description": "The customer account number within the source system"
+        },
+        "customerName": {
+          "type": "string",
+          "description": "The customer account name within the source system"
+        },
+        "customerParentNumber": {
+          "type": "string",
+          "description": "The customer's parent account number within the source system"
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The invoice file name"
+        },
+        "fileType": {
+          "type": "string",
+          "description": "The extension on the invoice file"
+        },
+        "fileURL": {
+          "type": "string",
+          "description": "The URL to access the invoice file"
+        },
+        "fileCreationDate": {
+          "type": "string",
+          "description": "The date the invoice file was created"
+        }
+      }
+    }
+	
+  },  
+  
+  "$id": "http://bicgraphic.com/eventresponse.schema.json",
+  "type": "object",
+  "title": "ODS Event Response Schema",
+  "description": "This Schema defines the event data repsonse from ODS to any and all incoming event data from source systems",  
+   "required": [
+       "EventResponse"],
+  "properties": {
+    "EventResponse": {
+      "type": "object",
+	  "required": [
+        "EnterpriseEventID",
+        "EventBusinessID",
+        "EventStatus",
+        "MustRetryFlag",
+		"Invoicelist"
+      ],
+      "properties": {
+        "EnterpriseEventID": {
+          "type": "string",
+		  "description": "The Unique Event ID generated in ODS for the current event request from Source system"
+        },
+        "EventBusinessID": {
+          "type": "string",
+		  "description": "The business ID provided by the Source system in the Event request"
+        },
+        "EventStatus": {
+          "type": "string",
+		 "description": "The status of the event request within ODS",
+		 "enum": [
+            "SUCCESS" , "ERROR"  ]
+        },
+		"EventErrorCode": {
+          "type": "string",
+		 "description": "The unique error code identifying Business and System Faults to consumers"
+		},
+        "EventStatusMessage": {
+          "type": "string",
+		  "description": "Any pertaining event message that may be needed for the source system. This will be used mostly to describe any error message or description from ODS."
+        },
+        "MustRetryFlag": {
+          "type": "string",
+		  "description": "This flag indicates if the event needs to be retried from the source system in case of any error."
+        },
+		"Invoicelist": {
+          "type": "object",
+		  "required": [
+            "Invoices"
+          ],
+          "properties": {
+            "Invoices": {
+              "type": "array",
+			  "required": [
+                    "Invoice"
+                  ],
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "Invoice": {
+                      "$ref": "#/definitions/Invoice",
+					  "description": "The list of Invoices in ODS for the current event from consumer system",
+										
+                    }
+                  }
+                  
+                }
+              ]
+            }
+          }
+          
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://bicgraphic.com/Invoiceevent.schema.json",
+  "type": "object",
+  "title": "Invoice Event Schema",
+  "description": "This Schema defines the Invoice event data such as Create Update Delete for data sync to ODS",
+  
+   "required": [
+       "EventRequest"],
+  "properties": {
+    "EventRequest": {
+      "type": "object",
+	  "description": "Invoice Event Request from source system describing the kind of event and the Invoice data being edited",
+      "required": [
+		"EventObject",
+        "EventType",
+        "EventDateTime",
+        "EventSourceSystem",
+        "EventBusinessID",
+        "Invoice"
+      ],
+      "properties": {
+		"EventObject": {
+          "type": "string",
+		  "description": "The type of event object being transmitted from source system"
+		},
+        "EventType": {
+          "type": "string",
+		  "description": "The type of event data being transmitted from source system. Create / Update /Delete",
+		  "enum": [
+            "CREATE" , "UPDATE", "DELETE"  ]
+        },
+        "EventDateTime": {
+          "type": "string",
+		  "description": "The date and time at which the even occurred in the source system"
+        },
+        "EventSourceSystem": {
+          "type": "string",
+		  "description": "The source system at which the event occured",
+		  "examples": [
+            "EBS"
+          ]
+        },
+        "EventBusinessID": {
+          "type": "string",
+		  "description": "Business event ID for which the data is being transmitted in the current event",
+          "examples": [
+            "Invoice#"
+          ]
+        },
+        "Invoice": {
+      "type": "object",
+      "description": "This object identifies the fields required to describe invoice object in ODS",
+      "required": ["invoiceNumber","soNumber"],
+      "properties": {
+        "invoiceNumber": {
+          "type": "string",
+          "description": "The Invoice Number associated to the Order for a customer"
+        },
+        "invoiceType": {
+          "type": "string",
+          "description": "The type of invoice being generated for the order"
+        },
+        "invoiceDate": {
+          "type": "string",
+          "description": "The date the order was invoiced"
+        },
+        "dueDate": {
+          "type": "string",
+          "description": "The customer customer's due date to fulfill the invoice"
+        },
+        "invoiceAmount": {
+          "type": "number",
+          "description": "The total invoice amount for the Order. This value can be a partial amount of an order"
+        },
+        "poNumber": {
+          "type": "string",
+          "description": "The customer purchase order number within the source system"
+        },
+        "soNumber": {
+          "type": "string",
+          "description": "The customer sales order number within the source system"
+        },
+        "CurrencyCode": {
+          "type": "string",
+          "description": "The currency code that the invoice was generated against"
+        },
+        "invoiceStatus": {
+          "type": "string",
+          "description": "The status of the invoice."
+        },
+        "amountDue": {
+          "type": "number",
+          "description": "The amount due from the customer to fulfill the invoice"
+        },
+        "customerNumber": {
+          "type": "string",
+          "description": "The customer account number within the source system"
+        },
+        "customerName": {
+          "type": "string",
+          "description": "The customer account name within the source system"
+        },
+        "customerParentNumber": {
+          "type": "string",
+          "description": "The customer's parent account number within the source system"
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The invoice file name"
+        },
+        "fileType": {
+          "type": "string",
+          "description": "The extension on the invoice file"
+        },
+        "fileURL": {
+          "type": "string",
+          "description": "The URL to access the invoice file"
+        },
+        "fileCreationDate": {
+          "type": "string",
+          "description": "The date the invoice file was created"
+        }
+      }
+    }
+      }
+    }
+  }
+}

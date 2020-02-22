@@ -1,0 +1,102 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "http://bicgraphic.com/customerevent.schema.json",
+	"type": "object",
+	"title": "Customer Event Schema",
+	"description": "This Schema defines the customer event data such as Create Update Delete for data sync to ODS",
+
+	"required": [
+		"EventRequest"
+	],
+	"properties": {
+		"EventRequest": {
+			"type": "object",
+			"description": "SalesRep Event Request from source system describing the kind of event and the SalesRep data being edited",
+			"required": [
+				"EventObject",
+				"EventType",
+				"EventDateTime",
+				"EventSourceSystem",
+				"EventBusinessID",
+				"SalesRep"
+			],
+			"properties": {
+				"EventObject": {
+					"type": "string",
+					"description": "The type of EventObject being transmitted from source system"
+				},
+				"EventType": {
+					"type": "string",
+					"description": "The type of event data being transmitted from source system. Create / Update /Delete",
+					"enum": [
+						"CREATE", "UPDATE", "DELETE"
+					]
+				},
+				"EventDateTime": {
+					"type": "string",
+					"description": "The date and time at which the event occurred in the source system"
+				},
+				"EventSourceSystem": {
+					"type": "string",
+					"description": "The source system at which the event occured",
+					"examples": [
+						"EBS"
+					]
+				},
+				"EventBusinessID": {
+					"type": "string",
+					"description": "Business event ID for which the data is being transmitted in the current event",
+					"examples": [
+						"CustomerAccountNumber"
+					]
+				},
+				"SalesRep": {
+					"type": "object",
+					"properties": {
+						"CustomerAccountNumber": {
+							"type": "string",
+							"description": "The CustomerAccountNumber within the source system"
+						},
+						"CustomerAccountName": {
+							"type": "string",
+							"description": "The CustomerAccountName within the source system"
+						},
+						"CategoryType": {
+							"type": "string",
+							"description": " Category Type for an Account. Example : Hardgoods "
+						},
+						"CategoryID": {
+							"type": "number",
+							"description": " The unique ID of the category type for an Account "
+						},
+						"ResourceType": {
+							"type": "string",
+							"description": " The resource type of the sales rep. Example: FIELD_SALES "
+						},
+						"ResourceTypeID": {
+							"type": "number",
+							"description": "The unique ID for the  resource type of the sales rep "
+						},
+						"ResourceName": {
+							"type": "string",
+							"description": "The customer sales rep Name associated to the customer for each category "
+						},
+						"ResourceID": {
+							"type": "number",
+							"description": "The unique ID usually EBS USER ID of the customer sales rep Name associated to the customer for each category"
+						},
+						"isPrimary": {
+							"type": "boolean",
+							"description": "Denotes if the sales rep for the customer is primary "
+						},
+						"CurrencyCode": {
+							"type": "string",
+							"description": "The currency code associated to the customer "
+							
+						}
+					}
+				}
+			}
+		}
+	}
+}
